@@ -200,6 +200,7 @@ def icedistance(iceconc_input):
 
 ## load one time step of just the ice concentrations
 ## SET THIS
+extraname = '-floemin50'
 casename = 'cesm23iw_dtice100_w-nl-hf'
 #ctrlname = 'cesm23iws1tsks_bittest1'
 monsel = '07' #np.arange(1,3)
@@ -211,7 +212,7 @@ def preprocess(ds):
     return ds
 
 ## experiment ww3
-rundir = '/glade/scratch/vcooper/' + casename + '/run/hourly_hf/'
+rundir = '/glade/scratch/vcooper/' + casename + '/run/hourly_floemin50/'
 rundir_cp = copy.copy(rundir)
 
 year = str(2018)
@@ -318,7 +319,7 @@ exp_ww['TLAT'] = (distances_b[0].dims, distances_b.TLAT.values)
 exp_ww = exp_ww.set_coords(['TLAT','TLON'])
 exp_ww['dist'] = distances_b
 
-new_filename = '/glade/scratch/vcooper/waveice_analysis/model_dev/'+casename+'-HF-'+'.ww3.hi.beaufort.'+year+'-'+monsel+'.nc'
+new_filename = '/glade/scratch/vcooper/waveice_analysis/model_dev/'+ casename + extraname +'.ww3.hi.beaufort.'+year+'-'+monsel+'.nc'
 print('saving to ', new_filename)
 
 exp_ww.to_netcdf(path=new_filename)

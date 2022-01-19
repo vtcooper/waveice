@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-
+# VTC: SEARCH FOR 'SET THIS' to get to part to change
 import numpy as np
 import os
 import pandas as pd
@@ -200,7 +200,11 @@ def icedistance(iceconc_input):
 
 ## load one time step of just the ice concentrations
 ## SET THIS
-casename = 'cesm23iw_dtice100'
+saveout_append = '-t2t4-wDnlDlnU'#'-w50nl50'
+#casename = 'cesm23iw_ic4m4'
+casename = 'cesm23iw_dtice100_w-nl-hf'
+year = str(2018)
+
 ctrlname = 'cesm23iws1tsks_bittest1'
 monsel = np.arange(1,3)
 
@@ -213,8 +217,7 @@ def preprocess(ds):
 ## experiment ww3
 rundir = '/glade/scratch/vcooper/' + casename + '/run/'
 rundir_cp = copy.copy(rundir)
-
-year = str(2018)
+ 
 
 flist = casename + '.ww3.hi.'+year+'-*.nc'
 
@@ -279,7 +282,7 @@ distances_b = distances_da.where(beau_mask_xr,drop=True)
 
 ## load one time step of just the ice concentrations
 ## SET THIS
-casename = 'cesm23iw_dtice100'
+#casename = 'cesm23iw_dtice100_w-nl-hf'
 ctrlname = 'cesm23iws1tsks_bittest1'
 
 ###### WW3 ########
@@ -318,7 +321,8 @@ exp_ww['TLAT'] = (distances_b[0].dims, distances_b.TLAT.values)
 exp_ww = exp_ww.set_coords(['TLAT','TLON'])
 exp_ww['dist'] = distances_b
 
-new_filename = '/glade/scratch/vcooper/waveice_analysis/model_dev/'+casename+'.ww3.hi.beaufort.'+year+'.nc'
+spath = '/glade/scratch/vcooper/waveice_analysis/model_dev/'
+new_filename = spath + casename + saveout_append +'.ww3.hi.beaufort.'+year+'.nc'
 print('saving to ', new_filename)
 
 exp_ww.to_netcdf(path=new_filename)
