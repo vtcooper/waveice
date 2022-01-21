@@ -200,9 +200,9 @@ def icedistance(iceconc_input):
 
 ## load one time step of just the ice concentrations
 ## SET THIS
-saveout_append = '-t2t4-wDnlDlnU'#'-w50nl50'
-#casename = 'cesm23iw_ic4m4'
-casename = 'cesm23iw_dtice100_w-nl-hf'
+saveout_append = '-wDnlDlnU'#'-w50nl50'
+casename = 'cesm23iw_ic4m3'
+#casename = 'cesm23iw_dtice100_w-nl-hf'
 year = str(2018)
 
 ctrlname = 'cesm23iws1tsks_bittest1'
